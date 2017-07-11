@@ -17,12 +17,6 @@ $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri ht
 Import-PSSession $Session
 Connect-MsolService -Credential $UserCredential
 
-$FirstName = Read-Host -Prompt 'First Name'
-$LastName = Read-Host -Prompt 'Last Name'
-$Department = Read-Host -Prompt 'Property'
-$Title = Read-Host -Prompt 'Title'
-$UserPrincipalName = Read-Host -Prompt 'Email Address'
-
 $DisplayName = $FirstName + ' ' + $LastName
 
 New-MsolUser -FirstName $FirstName -LastName $LastName -DisplayName $DisplayName -UserPrincipalName $UserPrincipalName -Password 'Changeme1' -UsageLocation US -Department $Department -Title $Title -LicenseAssignment PeakCapitalPartners:O365_BUSINESS_PREMIUM
