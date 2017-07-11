@@ -1,4 +1,13 @@
 ﻿#Connect to Office 365 and Exchange Online
+ 
+ param (
+  [Parameter(Mandatory=$true)][string]$FirstName,
+  [Parameter(Mandatory=$true)][string]$LastName,
+  [Parameter(Mandatory=$true)][string]$Department,
+  [Parameter(Mandatory=$true)][string]$Title,
+  [Parameter(Mandatory=$true)][string]$UserPrincipalName,
+  [Parameter(Mandatory=$true)][string]$Credential
+ )
 
 Set-ExecutionPolicy RemoteSigned
 $Username = "itnow@peakliving.com"
