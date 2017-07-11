@@ -9,7 +9,6 @@
   [Parameter(Mandatory=$true)][string]$Credential
  )
 
-Set-ExecutionPolicy RemoteSigned
 $Username = "itnow@peakliving.com"
 $Pass = "$Credential"
 $Password = $Pass|ConvertTo-SecureString -AsPlainText -Force
