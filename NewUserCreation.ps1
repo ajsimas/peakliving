@@ -1,6 +1,4 @@
-﻿#Connect to Office 365 and Exchange Online
- 
- param (
+param (
   [Parameter(Mandatory=$true)][string]$FirstName,
   [Parameter(Mandatory=$true)][string]$LastName,
   [Parameter(Mandatory=$true)][string]$Department,
@@ -8,6 +6,8 @@
   [Parameter(Mandatory=$true)][string]$UserPrincipalName,
   [Parameter(Mandatory=$true)][string]$Credential
  )
+
+#Connect to Office 365 and Exchange Online
 
 $Username = "itnow@peakliving.com"
 $Pass = "$Credential"
@@ -19,6 +19,12 @@ Connect-MsolService -Credential $UserCredential
 
 $DisplayName = $FirstName + ' ' + $LastName
 
-New-MsolUser -FirstName $FirstName -LastName $LastName -DisplayName $DisplayName -UserPrincipalName $UserPrincipalName -Password 'Changeme1' -UsageLocation US -Department $Department -Title $Title -LicenseAssignment PeakCapitalPartners:O365_BUSINESS_PREMIUM
+If ($Title -eq "Service Manager"){
+    New-MsolUser -FirstName $FirstName -LastName $LastName -DisplayName $DisplayName -UserPrincipalName $UserPrincipalName -Password 'Changeme1' -UsageLocation US -Department $Department -Title $Title -LicenseAssignment PeakCapitalPartners:EXCHANGESTANDARD
+}
+
+Else {
+    New-MsolUser -FirstName $FirstName -LastName $LastName -DisplayName $DisplayName -UserPrincipalName $UserPrincipalName -Password 'Changeme1' -UsageLocation US -Department $Department -Title $Title -LicenseAssignment PeakCapitalPartners:O365_BUSINESS_PREMIUM
+}
 
 Remove-PSSession $Session
