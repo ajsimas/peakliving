@@ -17,6 +17,12 @@ $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri ht
 Import-PSSession $Session
 Connect-MsolService -Credential $UserCredential
 
+$AliasOwner = get-mailbox | where emailaddresses -like smtp:$UserPrincipalName
+
+If ($AliasOwner){
+    Set-Mailbox -Identity $AliasOwner -EmailAddresses @{remove=smtp:$UserPrincipalName}
+    }
+
 $DisplayName = $FirstName + ' ' + $LastName
 
 If ($Title -eq "Service Manager"){
