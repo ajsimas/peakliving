@@ -1,4 +1,11 @@
-Set-ExecutionPolicy RemoteSigned
+Param (
+
+    [Parameter(Mandatory=$true)][string]$UserPrincipalName,
+    [Parameter(Mandatory=$true)][string]$Manager
+    [Parameter(Mandatory=$true)][string]$Credential
+
+)
+
 $Username = "itnow@peakliving.com"
 $Pass = "$Credential"
 $Password = $Pass | ConvertTo-SecureString -AsPlainText -Force
@@ -6,13 +13,6 @@ $UserCredential = new-object -typename System.Management.Automation.PSCredential
 $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
 Import-PSSession $Session
 Connect-MsolService -Credential $UserCredential
-
-Param (
-
-    [Parameter(Mandatory=$true)][string]$UserPrincipalName,
-    [Parameter(Mandatory=$true)][string]$Manager
-
-)
 
 $FirstName = Get-MsolUser -UserPrincipalName $UserPrincipalName | select -ExpandProperty FirstName
 $LastName = Get-MsolUser -UserPrincipalName $UserPrincipalName | select -ExpandProperty LastName
