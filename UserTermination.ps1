@@ -1,9 +1,7 @@
 Param (
-
     [Parameter(Mandatory=$true)][string]$UserPrincipalName,
     [Parameter(Mandatory=$true)][string]$Manager,
     [Parameter(Mandatory=$true)][string]$Credential
-
 )
 
 $Username = "itnow@peakliving.com"
